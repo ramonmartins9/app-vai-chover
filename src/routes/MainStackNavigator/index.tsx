@@ -6,12 +6,10 @@ import HomeScreen from "../../screens/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
-const MainStackNavigator = () => {
-	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="HomeScreen" component={HomeScreen} />
-		</Stack.Navigator>
-	);
-};
+const MainStackNavigator = () => (
+	<Stack.Navigator screenOptions={{ headerShown: false }}>
+		<Stack.Screen name="HomeScreen" component={HomeScreen} />
+	</Stack.Navigator>
+);
 
 export default observer(MainStackNavigator);

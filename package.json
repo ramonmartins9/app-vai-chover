@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "code-check": "yarn eslint ./src",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.4.1",
+    "localized-strings": "^0.2.4",
     "mobx": "^6.3.13",
     "mobx-react-lite": "^3.2.3",
     "native-base": "3.2.1",
@@ -30,16 +32,38 @@
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.5",
     "@types/react-test-renderer": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+		"@typescript-eslint/parser": "^4.31.2",
     "babel-jest": "^26.6.3",
-    "eslint": "^7.14.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.64.0",
     "react-test-renderer": "17.0.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "eslint": "^7.14.0",
+		"eslint-config-standard": "^16.0.3",
+		"eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
+		"eslint-import-resolver-typescript": "^2.5.0",
+		"eslint-plugin-jest": "^24.4.2",
+		"eslint-plugin-jsdoc": "^36.1.0",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prefer-arrow": "^1.2.3",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-promise": "^5.1.0",
+		"eslint-plugin-react": "^7.26.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-standard": "^5.0.0",
+		"eslint-plugin-unused-imports": "^1.1.4",
+		"husky": "^7.0.2"
   },
   "resolutions": {
     "@types/react": "^17"
   },
+  "husky": {
+		"hooks": {
+			"pre-push": "yarn code-check"
+		}
+	},
   "jest": {
     "preset": "react-native",
     "moduleFileExtensions": [

@@ -7,13 +7,13 @@ import { NativeBaseProvider } from "native-base";
 import theme from "../theme";
 
 const App: React.FC = () => (
-    <SafeAreaProvider>
+	<SafeAreaProvider>
 		<NativeBaseProvider theme={theme}>
-        <NavigationContainer>
-            <MainStackNavigator />
-        </NavigationContainer>
+			<NavigationContainer>
+				<MainStackNavigator />
+			</NavigationContainer>
 		</NativeBaseProvider>
-    </SafeAreaProvider>
+	</SafeAreaProvider>
 );
 
 export default App;
