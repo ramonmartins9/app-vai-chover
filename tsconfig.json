@@ -13,6 +13,7 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"baseUrl": "src",
+		"typeRoots": ["./src/declarations/types"],
 		"paths": {
 			"~/*": ["*"]
 		}

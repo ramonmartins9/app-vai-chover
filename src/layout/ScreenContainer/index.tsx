@@ -11,16 +11,20 @@ import { Box } from "native-base";
 import { observer } from "mobx-react-lite";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-interface IProps {
+export interface IScreenContainerProps {
 	hideKeyBoardOnScroll?: boolean;
 	scrollable?: boolean;
+	header?: JSX.Element;
 }
+
+interface IProps extends IScreenContainerProps {}
 
 const ScreenContainer: React.FC<IProps> = (props) => {
 	const {
 		children,
 		hideKeyBoardOnScroll,
 		scrollable,
+		header,
 	} = props;
 	const onScrollBegin = hideKeyBoardOnScroll ? Keyboard.dismiss : () => {};
 
@@ -51,6 +55,7 @@ const ScreenContainer: React.FC<IProps> = (props) => {
 					barStyle="dark-content"
 				/>
 			</Box>
+			{header}
 			{scrollable ? (
 				<ScrollView
 					onScrollBeginDrag={onScrollBegin}

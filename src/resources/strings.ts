@@ -7,6 +7,11 @@ const strings = new LocalizedStrings({
 				search: "Buscar",
 			},
 		},
+		screens: {
+			home: {
+				title: "home",
+			},
+		},
 	},
 });
 
