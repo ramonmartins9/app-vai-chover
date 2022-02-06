@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, FlatList } from "native-base";
 import ScreenNavbarContainer from "../../layout/ScreenNavbarContainer";
-import { InputSearch, WeatherCard, Loader } from "../../components";
+import { InputSearch, PlaceCard, Loader } from "../../components";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import Store from "./store";
 import useScreenNavigator from "../../hooks/useScreenNavigator";
 import routes from "../../resources/routes";
+import strings from "../../resources/strings";
 
 
 const SearchScreen: React.FC = () => {
@@ -17,9 +18,17 @@ const SearchScreen: React.FC = () => {
 		navigator.push(routes.screens.homeScreen.getRoute({ lat, lng }))
 	);
 
+	const onBackPress = () => (
+		navigator.goBack()
+	);
 
 	return (
-		<ScreenNavbarContainer >
+		<ScreenNavbarContainer
+			navbar={{
+				onBackPress,
+				title: strings.screens.search.title,
+			}}
+		>
 			<Loader isLoading={store.loading}>
 				<InputSearch
 					onChangeText={store.onChangeText}
@@ -30,8 +39,9 @@ const SearchScreen: React.FC = () => {
 					<FlatList
 						data={store.allPlaces}
 						keyExtractor={(item) => item.id}
+						showsVerticalScrollIndicator={false}
 						renderItem={(item) => (
-							<WeatherCard
+							<PlaceCard
 								onSelected={() => goToHomeScreen(item.item.geometry.lat, item.item.geometry.lng)}
 								place={item.item}
 							/>

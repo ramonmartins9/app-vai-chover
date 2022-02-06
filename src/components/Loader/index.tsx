@@ -18,8 +18,6 @@ export const Loader: React.FC<IProps> = (props) => {
 							<Skeleton h="20" />
 							<Skeleton h="20" />
 							<Skeleton h="20" />
-							<Skeleton h="20" />
-							<Skeleton h="20" />
 						</VStack>
 					</Center>
 				)

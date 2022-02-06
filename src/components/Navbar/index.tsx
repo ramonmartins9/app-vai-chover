@@ -9,6 +9,7 @@ import {
 } from "native-base";
 import Logo from "../../assets/logo.svg";
 import colors from "../../theme/colors";
+import Icon from "react-native-vector-icons/AntDesign";
 
 export interface INavbarProps {
 	title?: string;
@@ -41,9 +42,7 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 						position="absolute"
 						left={2}
 					>
-						{
-							"<"
-						}
+						<Icon name="left" size={25} color="#e48900" />
 					</Pressable>
 				)}
 				{

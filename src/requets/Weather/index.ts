@@ -8,20 +8,37 @@ export interface IWeather {
 	icon: string;
 }
 
+export interface ICoord {
+	lon: number;
+	lat: number;
+}
+
+export interface IMain {
+	temp: number;
+	feels_like: number;
+	temp_min: number;
+	temp_max: number;
+	min: number;
+	max: number;
+	pressure: number;
+	humidity: number;
+}
+
 export interface ICurrentWeather {
+	daily: any;
 	weather: IWeather[];
-	main: {
-		temp: number;
-		feels_like: number;
-		temp_min: number;
-		temp_max: number;
-		pressure: number;
-		humidity: number;
-	};
+	main: IMain;
+	coord: ICoord;
 	sys: {
 		country: string;
 	};
 	name: string;
+}
+
+export interface IWeatherDay {
+	dt: number;
+	weather: IWeather[];
+	temp: IMain;
 }
 
 export default class Weather {
@@ -43,5 +60,20 @@ export default class Weather {
 		});
 
 		return response.data;
+	};
+
+
+	public getCurrentWeatherDaily = async (lat?: number, lon?: number): Promise<IWeatherDay[]> => {
+
+		const response = await axios.get<ICurrentWeather>("https://api.openweathermap.org/data/2.5/onecall", {
+			params: {
+				lat,
+				lon,
+				appid: API_WEATHER_URL,
+				lang: "pt",
+			},
+		});
+
+		return response.data.daily;
 	};
 }

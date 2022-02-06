@@ -20,7 +20,8 @@ export default class Store {
 	public getAllPlaces = async (name: string) => {
 		runInAction(() => this.loading = true);
 		try {
-			this.allPlaces = await this.place.getAllPlaces(name);
+			const response = await this.place.getAllPlaces(name);
+			runInAction(() => this.allPlaces = response);
 		} catch (e) {
 			treatErrorMessage(e);
 		} finally {

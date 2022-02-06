@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import Weather, { ICurrentWeather } from "../../requets/Weather";
 import { treatErrorMessage } from "../../resources/treatError";
 
@@ -13,13 +13,14 @@ export default class Store {
 	}
 
 	public getCurrentWeather = async (lat?: number, lng?: number) => {
-		this.loading = true;
+		runInAction(() => this.loading = true);
 		try {
-			this.currentWeather = await this.weather.getCurrentWeather(lat, lng);
+			const response = await this.weather.getCurrentWeather(lat, lng);
+			runInAction(() => this.currentWeather = response);
 		} catch (e) {
 			treatErrorMessage(e);
 		} finally {
-			this.loading = false;
+			runInAction(() => this.loading = false);
 		}
 	};
 }

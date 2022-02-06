@@ -1,26 +1,40 @@
-import { makeAutoObservable } from "mobx";
-import Place, { IPlace } from "../../requets/Place";
+import { makeAutoObservable, runInAction } from "mobx";
+import Weather, { ICurrentWeather, IWeather, IWeatherDay } from "../../requets/Weather";
 import { treatErrorMessage } from "../../resources/treatError";
 
 export default class Store {
-	public loading = false;
-	public allPlaces: IPlace[] | [] = [];
-	public place = new Place();
-	public search = "";
+	public weatherLoading = false;
+	public weatherDailyLoading = false;
+	public weatherDaily: IWeatherDay[] | [] = [];
+	public fiveCurrentWeather: IWeather[] | [] = [];
+	public currentWeather: ICurrentWeather | null = null;
+	public weather = new Weather();
 
-	constructor() {
+	constructor(lat?: number, lon?: number) {
 		makeAutoObservable(this);
-		this.getAllPlaces();
+		this.getCurrentWeatherDaily(lat, lon);
+		this.getCurrentWeather(lat, lon);
 	}
 
-	public getAllPlaces = async () => {
-		this.loading = true;
+	public getCurrentWeatherDaily = async (lat?: number, lng?: number) => {
+		runInAction(() => this.weatherLoading = true);
 		try {
-			this.allPlaces = await this.place.getAllPlaces(this.search);
+			this.weatherDaily = await this.weather.getCurrentWeatherDaily(lat, lng);
 		} catch (e) {
 			treatErrorMessage(e);
 		} finally {
-			this.loading = false;
+			runInAction(() => this.weatherLoading = false);
+		}
+	};
+
+	public getCurrentWeather = async (lat?: number, lng?: number) => {
+		runInAction(() => this.weatherDailyLoading = true);
+		try {
+			this.currentWeather = await this.weather.getCurrentWeather(lat, lng);
+		} catch (e) {
+			treatErrorMessage(e);
+		} finally {
+			runInAction(() => this.weatherDailyLoading = false);
 		}
 	};
 }

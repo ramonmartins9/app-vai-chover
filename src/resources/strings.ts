@@ -1,4 +1,6 @@
+import "moment/locale/pt-br";
 import LocalizedStrings from "localized-strings";
+import moment from "moment";
 
 const strings = new LocalizedStrings({
 	ptBR: {
@@ -9,11 +11,15 @@ const strings = new LocalizedStrings({
 			weather: {
 				icon: (iconName?: string) => `http://openweathermap.org/img/wn/${iconName}@2x.png`,
 				averageTemp: (min?: number, max?: number) => `min ${min}° - max ${max}°`,
+				convertUnixTime: (dt: number) =>  moment(new Date(dt * 1000)).format("dddd"),
 			},
 		},
 		screens: {
 			home: {
 				added: "Adicionar",
+			},
+			search: {
+				title: "Buscar Cidades",
 			},
 		},
 	},

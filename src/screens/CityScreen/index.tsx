@@ -1,28 +1,46 @@
 import React from "react";
-import { FlatList } from "native-base";
 import ScreenNavbarContainer from "../../layout/ScreenNavbarContainer";
-import { InputSearch, WeatherCard } from "../../components";
+import { Loader, CityCard } from "../../components";
 import { observer, useLocalObservable } from "mobx-react-lite";
+import useScreenNavigator from "../../hooks/useScreenNavigator";
 import Store from "./store";
 
+export interface ICityParams {
+	lat?: number;
+	lng?: number;
+}
 
-const CityScreen: React.FC = () => {
+interface IProps extends ScreenDefaultProps<ICityParams> { }
 
-	const store = useLocalObservable(() => new Store());
+const CityScreen: React.FC<IProps> = (props) => {
+
+	const { route } = props;
+	const navigator = useScreenNavigator();
+	const store = useLocalObservable(() => new Store(route.params?.lat, route.params?.lng));
+
+	const onBackPress = () => (
+		navigator.goBack()
+	);
 
 	return (
-		<ScreenNavbarContainer>
-			<InputSearch />
-			<FlatList
-				data={store.allPlaces}
-				keyExtractor={(item) => item.id}
-				refreshing={store.loading}
-				onEndReachedThreshold={0.4}
-				showsVerticalScrollIndicator={false}
-				renderItem={(item) => (
-					<WeatherCard place={item.item} />
-				)}
-			/>
+		<ScreenNavbarContainer
+			navbar={{
+				onBackPress,
+				title: store.currentWeather?.name,
+			}}
+			screenContainer={{
+				scrollable: true,
+			}}
+		>
+			<Loader isLoading={store.weatherDailyLoading}>
+				{store.weatherDaily.map((daily, index) => (
+					<CityCard
+						key={index}
+						weather={daily.weather[0]}
+						dt={daily.dt}
+					/>
+				))}
+			</Loader>
 		</ScreenNavbarContainer>
 	);
 };
