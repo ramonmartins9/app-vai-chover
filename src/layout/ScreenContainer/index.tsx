@@ -45,14 +45,14 @@ const ScreenContainer: React.FC<IProps> = (props) => {
 	);
 
 	return (
-		<Box flex={1} >
+		<Box h="100%" flex={1} >
 			<Box
 				h={`${safeAreaInsets.top}px`}
-				backgroundColor="primary.500"
+				backgroundColor="#001e47"
 			>
 				<StatusBar
-					backgroundColor="primary.500"
-					barStyle="dark-content"
+					backgroundColor="#001e47"
+					barStyle="light-content"
 				/>
 			</Box>
 			{header}

@@ -1,10 +1,11 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { API_URL } from "react-native-dotenv";
+import { API_WEATHER_URL } from "react-native-dotenv";
 
 export interface IWeather {
 	main: string;
 	description: string;
+	icon: string;
 }
 
 export interface ICurrentWeather {
@@ -17,6 +18,10 @@ export interface ICurrentWeather {
 		pressure: number;
 		humidity: number;
 	};
+	sys: {
+		country: string;
+	};
+	name: string;
 }
 
 export default class Weather {
@@ -25,13 +30,13 @@ export default class Weather {
 		makeAutoObservable(this);
 	}
 
-	public getCurrentWeather = async (lat: number, lon: number): Promise<ICurrentWeather> => {
+	public getCurrentWeather = async (lat?: number, lon?: number): Promise<ICurrentWeather> => {
 
 		const response = await axios.get<ICurrentWeather>("http://api.openweathermap.org/data/2.5/weather", {
 			params: {
 				lat,
 				lon,
-				appid: API_URL,
+				appid: API_WEATHER_URL,
 				lang: "pt",
 				units: "metric",
 			},

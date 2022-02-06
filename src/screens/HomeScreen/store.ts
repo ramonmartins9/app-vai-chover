@@ -1,24 +1,23 @@
 import { makeAutoObservable } from "mobx";
-import Weather, { ICurrentWeather } from "../../requets/AllWeathers";
+import Weather, { ICurrentWeather } from "../../requets/Weather";
 import { treatErrorMessage } from "../../resources/treatError";
 
 export default class Store {
 	public loading = false;
-	public homeData: [] | null = null;
 	public currentWeather: ICurrentWeather | null = null;
 	public weather = new Weather();
 
-	constructor() {
+	constructor(lat?: number, lon?: number) {
 		makeAutoObservable(this);
+		this.getCurrentWeather(lat, lon);
 	}
 
-	public getCurrentWeather = async () => {
+	public getCurrentWeather = async (lat?: number, lng?: number) => {
 		this.loading = true;
 		try {
-			this.currentWeather = await this.weather.getCurrentWeather(35, 25);
-			console.log(this.currentWeather);
+			this.currentWeather = await this.weather.getCurrentWeather(lat, lng);
 		} catch (e) {
-			console.log(treatErrorMessage(e));
+			treatErrorMessage(e);
 		} finally {
 			this.loading = false;
 		}

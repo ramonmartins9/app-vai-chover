@@ -6,10 +6,14 @@ const strings = new LocalizedStrings({
 			inputSearch: {
 				search: "Buscar",
 			},
+			weather: {
+				icon: (iconName?: string) => `http://openweathermap.org/img/wn/${iconName}@2x.png`,
+				averageTemp: (min?: number, max?: number) => `min ${min}° - max ${max}°`,
+			},
 		},
 		screens: {
 			home: {
-				title: "home",
+				added: "Adicionar",
 			},
 		},
 	},
