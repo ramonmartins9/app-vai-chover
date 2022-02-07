@@ -62,7 +62,7 @@ const HomeScreen: React.FC<IProps> = (props) => {
 				) : (
 					<EmptyList text={strings.component.emptyList.home} />
 				)}
-				<Button mt={8} colorScheme="secondary" onPress={goToSearchScreen}>
+				<Button my={4} colorScheme="secondary" onPress={goToSearchScreen}>
 					<Text color="primary.500">
 						{strings.screens.home.added}
 					</Text>
