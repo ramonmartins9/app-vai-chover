@@ -5,8 +5,8 @@ import { treatErrorMessage } from "../../resources/treatError";
 export default class Store {
 	public weatherLoading = false;
 	public weatherDailyLoading = false;
-	public weatherDaily: IWeatherDay[] | [] = [];
-	public fiveCurrentWeather: IWeather[] | [] = [];
+	public weatherDaily: IWeatherDay[] = [];
+	public fiveCurrentWeather: IWeather[] = [];
 	public currentWeather: ICurrentWeather | null = null;
 	public weather = new Weather();
 

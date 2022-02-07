@@ -7,6 +7,7 @@ import Store from "./store";
 import useScreenNavigator from "../../hooks/useScreenNavigator";
 import routes from "../../resources/routes";
 import strings from "../../resources/strings";
+import { Dimensions } from "react-native";
 
 
 const SearchScreen: React.FC = () => {
@@ -21,6 +22,7 @@ const SearchScreen: React.FC = () => {
 	const onBackPress = () => (
 		navigator.goBack()
 	);
+	const screenHeight = Dimensions.get("window").height;
 
 	return (
 		<ScreenNavbarContainer
@@ -35,13 +37,14 @@ const SearchScreen: React.FC = () => {
 					value={store.search}
 					onSearch={() => store.getAllPlaces(store.search)}
 				/>
-				<Box h="89%">
+				<Box h={screenHeight - 180}>
 					<FlatList
 						data={store.allPlaces}
 						keyExtractor={(item) => item.id}
 						showsVerticalScrollIndicator={false}
 						renderItem={(item) => (
 							<PlaceCard
+								key={item.item}
 								onSelected={() => goToHomeScreen(item.item.geometry.lat, item.item.geometry.lng)}
 								place={item.item}
 							/>

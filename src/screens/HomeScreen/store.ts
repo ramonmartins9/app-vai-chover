@@ -4,19 +4,20 @@ import { treatErrorMessage } from "../../resources/treatError";
 
 export default class Store {
 	public loading = false;
-	public currentWeather: ICurrentWeather | null = null;
 	public weather = new Weather();
+	public currentWeather: ICurrentWeather | null = null;
 
-	constructor(lat?: number, lon?: number) {
+	constructor(onSet: () => void, lat?: number, lon?: number) {
 		makeAutoObservable(this);
-		this.getCurrentWeather(lat, lon);
+		this.getCurrentWeather(onSet, lat, lon);
 	}
 
-	public getCurrentWeather = async (lat?: number, lng?: number) => {
+	public getCurrentWeather = async (onSet: () => void, lat?: number, lng?: number) => {
 		runInAction(() => this.loading = true);
 		try {
 			const response = await this.weather.getCurrentWeather(lat, lng);
 			runInAction(() => this.currentWeather = response);
+			onSet();
 		} catch (e) {
 			treatErrorMessage(e);
 		} finally {

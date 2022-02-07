@@ -13,6 +13,11 @@ const strings = new LocalizedStrings({
 				averageTemp: (min?: number, max?: number) => `min ${min}° - max ${max}°`,
 				convertUnixTime: (dt: number) =>  moment(new Date(dt * 1000)).format("dddd"),
 			},
+			emptyList: {
+				home: "Não selecionou nenhuma cidade? Adicione agora!",
+				city: "Algo deu errado!",
+				search: "Busque uma cidade!",
+			},
 		},
 		screens: {
 			home: {

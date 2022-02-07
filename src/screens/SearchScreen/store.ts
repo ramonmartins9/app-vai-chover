@@ -4,7 +4,7 @@ import { treatErrorMessage } from "../../resources/treatError";
 
 export default class Store {
 	public loading = false;
-	public allPlaces: IPlace[] | [] = [];
+	public allPlaces: IPlace[] = [];
 	public place = new Place();
 	public search = "";
 
