@@ -50,7 +50,7 @@ const HomeScreen: React.FC<IProps> = (props) => {
 				scrollable: true,
 			}}
 		>
-			<Loader isLoading={authStore.mainLoading}>
+			<Loader isLoading={store.loading}>
 				{authStore.selectedCitys.length > 0 ? (
 					authStore.selectedCitys.map((city) => (
 						<WeatherCard

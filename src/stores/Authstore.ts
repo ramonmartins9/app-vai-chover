@@ -8,7 +8,7 @@ export default class Authstore {
 
 	public selectedCitys: ICurrentWeather[] = [];
 	public mainLoading = false;
-	private CURRENT_USER_KEY = "vaichover-currentUser";
+	private CURRENT_USER_KEY = "vaichoverkey";
 
 	constructor() {
 		makeAutoObservable(this);
