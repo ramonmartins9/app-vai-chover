@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, FlatList } from "native-base";
 import ScreenNavbarContainer from "../../layout/ScreenNavbarContainer";
-import { InputSearch, PlaceCard, Loader } from "../../components";
+import { InputSearch, PlaceCard, Loader, EmptyList } from "../../components";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import Store from "./store";
 import useScreenNavigator from "../../hooks/useScreenNavigator";
@@ -49,6 +49,7 @@ const SearchScreen: React.FC = () => {
 								place={item.item}
 							/>
 						)}
+						ListEmptyComponent={<EmptyList text={strings.component.emptyList.search}/>}
 					/>
 				</Box>
 			</Loader>

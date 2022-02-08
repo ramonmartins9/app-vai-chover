@@ -16,7 +16,7 @@ const strings = new LocalizedStrings({
 			emptyList: {
 				home: "Não selecionou nenhuma cidade? Adicione agora!",
 				city: "Algo deu errado!",
-				search: "Busque uma cidade!",
+				search: "Sem nenhum registro de pesquisa!",
 			},
 		},
 		screens: {

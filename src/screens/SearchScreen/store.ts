@@ -10,7 +10,6 @@ export default class Store {
 
 	constructor() {
 		makeAutoObservable(this);
-		this.getAllPlaces("Salvador");
 	}
 
 	public onChangeText = (text: string) => {
